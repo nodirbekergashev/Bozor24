@@ -1,7 +1,6 @@
 package uz.pdp;
 
-public class Main {
+public class Core {
     public static void main(String[] args) {
-
     }
 }
