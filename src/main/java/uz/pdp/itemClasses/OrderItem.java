@@ -1,5 +1,17 @@
 package uz.pdp.itemClasses;
 
-public class OrderItem {
+import lombok.*;
+import uz.pdp.baseAbs.BaseModel;
+import uz.pdp.enums.OrderStatus;
 
+import java.util.UUID;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class OrderItem extends BaseModel {
+
+    private OrderStatus status;
+    private UUID cartId;
 }
