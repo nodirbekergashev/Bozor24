@@ -1,4 +1,5 @@
 package uz.pdp.itemClasses;
 
-public class CartItem {
+public final class CartItem {
+
 }
