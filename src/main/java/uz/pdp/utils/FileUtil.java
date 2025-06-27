@@ -1,4 +1,4 @@
 package uz.pdp.utils;
 
-public class FileUtil {
+public final class FileUtil {
 }
