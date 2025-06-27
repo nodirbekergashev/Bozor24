@@ -5,23 +5,24 @@ import uz.pdp.enums.OrderStatus;
 import uz.pdp.itemClasses.OrderItem;
 import uz.pdp.model.Order;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static uz.pdp.utils.FileUtil.readFromJson;
+import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class OrderService implements BaseService<Order> {
     private static List<Order> orders;
     private static final String pathName = "orders.json";
 
     public OrderService() {
-        orders = readFromJsonFile(pathName, Order.class);
+        orders = readFromJson(pathName, Order.class);
     }
 
-    private List<Order> readFromJsonFile(String pathName, Class<Order> orderClass) {
-
-        return new ArrayList<>();
-    }
 
     @Override
     public boolean add(Order order) {
@@ -63,7 +64,11 @@ public class OrderService implements BaseService<Order> {
 
     @Override
     public void saveToFile() {
-
+        try {
+            writeToJson(pathName, orders);
+        } catch (IOException e) {
+            System.out.println("File cannot find");
+        }
     }
 
     public boolean orderIsDefined(UUID userId) {

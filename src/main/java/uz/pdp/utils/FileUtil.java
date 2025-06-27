@@ -25,15 +25,14 @@ public final class FileUtil {
         jsonMapper.writeValue(new File(PATH + fileName), t);
     }
 
-    public static <T> List<T> readFromJson(String fileName, Class<T> clazz) throws IOException {
+    public static <T> List<T> readFromJson(String fileName, Class<T> clazz) {
         try {
-            return jsonMapper.readValue(new File(PATH + fileName),
+            File file = new File(PATH + fileName);
+            if (file.length() == 0) return new ArrayList<>();
+            return jsonMapper.readValue(file,
                     jsonMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
-            if (e.getMessage().contains("No content to map due to end-of-input")) {
-                return new ArrayList<>();
-            }
-            throw e;
+            return new ArrayList<>();
         }
     }
 
@@ -41,15 +40,14 @@ public final class FileUtil {
         xmlMapper.writeValue(new File(PATH + fileName), t);
     }
 
-    public static <T> List<T> readFromXml(String fileName, Class<T> clazz) throws IOException {
+    public static <T> List<T> readFromXml(String fileName, Class<T> clazz) {
         try {
-            return xmlMapper.readValue(new File(PATH + fileName),
+            File file = new File(PATH + fileName);
+            if (file.length() == 0) return  new ArrayList<>();
+            return xmlMapper.readValue(file,
                     xmlMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
-            if (e.getMessage().contains("No content to map due to end-of-input")) {
-                return new ArrayList<>();
-            }
-            throw e;
+            return new ArrayList<>();
         }
     }
 
