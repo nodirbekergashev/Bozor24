@@ -1,6 +1,5 @@
 package uz.pdp.service;
 
-import uz.pdp.baseAbs.BaseModel;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.model.User;
 
