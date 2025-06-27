@@ -8,7 +8,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class CartService implements BaseService<Cart> {
-    private ArrayList<Cart> carts = new ArrayList<>();
+    private static final String FILE_NAME = "carts.json";
+    private List<Cart> carts;
+
+    public CartService(){
+
+    }
+
 
     @Override
     public boolean add(Cart cart) {
