@@ -66,7 +66,7 @@ public class OrderService implements BaseService<Order> {
     public void saveToFile() {
         try {
             writeToJson(pathName, orders);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("File cannot find");
         }
     }
