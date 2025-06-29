@@ -1,5 +1,14 @@
 package uz.pdp.itemClasses;
 
-public final class CartItem {
+import lombok.*;
+
+import java.util.UUID;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CartItem {
+    private UUID productId;
+    private int quantity;
 
 }
