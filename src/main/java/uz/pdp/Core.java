@@ -11,6 +11,7 @@ public class Core {
     static ProductService productService = new ProductService();
     static OrderService orderService = new OrderService();
     static User currentUser;
+
     static Scanner scannerStr = new Scanner(System.in);
     static Scanner scannerInt = new Scanner(System.in);
 
@@ -44,7 +45,6 @@ public class Core {
             /// admins page
             //todo create menu for admin & write methods for admin like this
             // adminPage()
-
 
             /// Sellers page
             //todo create menu for seller & write methods for seller like this

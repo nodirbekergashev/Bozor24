@@ -17,8 +17,9 @@ public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
 
 
-    public CartService(){
-        carts = readFromJson(pathName,Cart.class);
+
+    public CartService() {
+        carts = readFromJson(pathName, Cart.class);
     }
 
     @Override

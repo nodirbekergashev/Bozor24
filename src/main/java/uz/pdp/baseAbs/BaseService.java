@@ -23,5 +23,4 @@ public interface BaseService<T> {
     default String getUpdatedTimeById() {
         return "";
     }
-
 }
