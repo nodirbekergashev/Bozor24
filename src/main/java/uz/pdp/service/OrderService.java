@@ -23,7 +23,6 @@ public class OrderService implements BaseService<Order> {
         orders = readFromJson(pathName, Order.class);
     }
 
-
     @Override
     public boolean add(Order order) {
         if (order != null && !orderIsDefined(order.getUserId())) {
