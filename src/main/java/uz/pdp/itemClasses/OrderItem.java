@@ -9,7 +9,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+
 public class OrderItem extends BaseModel {
 
     private OrderStatus status;
