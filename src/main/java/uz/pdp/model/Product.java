@@ -9,7 +9,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 
 public class Product extends BaseModel {
     private String name;
