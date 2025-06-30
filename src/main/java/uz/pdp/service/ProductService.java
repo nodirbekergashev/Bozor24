@@ -8,12 +8,22 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static uz.pdp.utils.FileUtil.readFromJson;
+import static uz.pdp.utils.FileUtil.writeToJson;
+
 public class ProductService implements BaseService<Product> {
-    private List<Product> products = new ArrayList<>();
+    private static List<Product> products;
+    private static final String pathname = "orders.json";
+
+    public ProductService() {
+        readFromJson(pathname, Product.class);
+    }
+
     @Override
     public boolean add(Product product) {
         if (!isDefined(product.getSellerId(), product.getName())) {
             products.add(product);
+            saveToFile();
             return true;
         }
         return false;
@@ -31,6 +41,7 @@ public class ProductService implements BaseService<Product> {
             old.setActive(product.isActive());
             old.setCatId(product.getCatId());
             old.setCreatedAt(product.getCreatedAt());
+            saveToFile();
         }
     }
 
@@ -59,7 +70,7 @@ public class ProductService implements BaseService<Product> {
 
     @Override
     public void saveToFile() {
-
+        writeToJson(pathname, products);
     }
 
     @Override
