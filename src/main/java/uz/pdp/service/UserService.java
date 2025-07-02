@@ -12,7 +12,6 @@ import static uz.pdp.utils.FileUtil.readFromXml;
 import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class UserService implements BaseService<User> {
-    private static List<User> users;
     private static final String pathName = "users.xml";
 
     public UserService() {

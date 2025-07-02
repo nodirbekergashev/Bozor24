@@ -15,8 +15,6 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "Categories")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CategoryListWrapper {
      @JacksonXmlProperty(localName = "category")
     @JacksonXmlElementWrapper(useWrapping = false)
