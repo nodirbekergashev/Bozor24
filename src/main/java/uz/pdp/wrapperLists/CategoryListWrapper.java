@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.pdp.model.Category;
 //import uz.pdp.model.Category;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 public class CategoryListWrapper {
-    // @JacksonXmlProperty(localName = "category")
-    //@JacksonXmlElementWrapper(useWrapping = false)
-    // private List<Category> categoryList;
+     @JacksonXmlProperty(localName = "category")
+    @JacksonXmlElementWrapper(useWrapping = false)
+     private List<Category> categoryList;
 }
