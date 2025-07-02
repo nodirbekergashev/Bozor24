@@ -14,15 +14,15 @@ import java.util.UUID;
 
 import static uz.pdp.utils.FileUtil.readFromJson;
 import static uz.pdp.utils.FileUtil.writeToJson;
+import static uz.pdp.db.Lists.orders;
 
 public class OrderService implements BaseService<Order> {
-    private static List<Order> orders;
+
     private static final String pathName = "orders.json";
 
     public OrderService() {
         orders = readFromJson(pathName, Order.class);
     }
-
 
     @Override
     public boolean add(Order order) {
