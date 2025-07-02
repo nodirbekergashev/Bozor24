@@ -6,6 +6,7 @@ import uz.pdp.model.Cart;
 import uz.pdp.model.Order;
 
 import java.util.ArrayList;
+import static uz.pdp.db.Lists.carts;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,6 @@ import static uz.pdp.utils.FileUtil.readFromJson;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class CartService implements BaseService<Cart> {
-    private List<Cart> carts;
     private static final String pathName = "carts.json";
 
 

@@ -4,6 +4,7 @@ import uz.pdp.baseAbs.BaseService;
 
 import java.util.List;
 import java.util.UUID;
+import static uz.pdp.db.Lists.categories;
 
 public class CategoryService implements BaseService {
     @Override

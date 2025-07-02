@@ -5,6 +5,7 @@ import uz.pdp.model.User;
 
 import java.util.List;
 import java.util.UUID;
+import static uz.pdp.db.Lists.users;
 
 public class UserService implements BaseService<User> {
     @Override
