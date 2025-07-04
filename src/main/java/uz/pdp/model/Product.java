@@ -16,4 +16,5 @@ public class Product extends BaseModel {
     private double price;
     private UUID catId;
     private UUID sellerId;
+    private Category category;
 }
