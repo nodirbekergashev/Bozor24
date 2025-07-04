@@ -5,7 +5,6 @@ import uz.pdp.itemClasses.CartItem;
 import uz.pdp.model.Cart;
 import uz.pdp.model.Order;
 
-import java.util.ArrayList;
 import static uz.pdp.db.Lists.carts;
 import java.util.List;
 import java.util.UUID;
