@@ -80,13 +80,13 @@ public class UserService implements BaseService<User> {
     }
 
     @Override
-    public String getCreatedTimeById() {
-        return BaseService.super.getCreatedTimeById();
+    public String getCreatedTimeById(UUID id) {
+        return BaseService.super.getCreatedTimeById(id);
     }
 
     @Override
-    public String getUpdatedTimeById() {
-        return BaseService.super.getUpdatedTimeById();
+    public String getUpdatedTimeById(UUID id) {
+        return BaseService.super.getUpdatedTimeById(id);
     }
 
     public User login(String username, String password) {
