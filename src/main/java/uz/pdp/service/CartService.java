@@ -16,7 +16,6 @@ public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
 
 
-
     public CartService() {
         carts = readFromJson(pathName, Cart.class);
     }
@@ -30,7 +29,6 @@ public class CartService implements BaseService<Cart> {
             System.out.println("Cart for this customer already exists.");
             return false;
         }
-
         carts.add(cart);
         saveToFile();
         return true;
@@ -41,7 +39,7 @@ public class CartService implements BaseService<Cart> {
     public void update(UUID id, Cart cart) {
         Cart existingCart = getById(id);
         if (existingCart != null) {
-            existingCart.setProducts(existingCart.getProducts());
+            existingCart.setProducts(cart.getProducts());
             saveToFile();
         }
 
