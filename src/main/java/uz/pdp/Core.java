@@ -5,6 +5,7 @@ import uz.pdp.model.User;
 import uz.pdp.service.*;
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Core {
@@ -37,8 +38,44 @@ public class Core {
     }
 
     private static void register() {
-        System.out.println("gdf");
-        scannerStr.nextLine();
+        System.out.println("Enter your full name: ");
+        String fullName = scannerStr.nextLine();
+        String username;
+        while (true) {
+            System.out.println("Enter username: ");
+            username = scannerStr.nextLine();
+            if (userService.isUsernameValid(username)) {
+                break;
+            } else {
+                System.out.println("Invalid username. Try again!");
+                System.out.println("Username should be contains lowercase english letters and '_' ");
+            }
+        }
+        System.out.println("Enter password: ");
+        String password = scannerStr.nextLine();
+        UserRole roleOption = UserRole.CUSTOMER;
+        while (true) {
+            System.out.println("""
+                    Select your role
+                    1. Customer
+                    2. Seller""");
+            try {
+                int option = scannerInt.nextInt();
+                if (option > 2 || option < 0) {
+                    System.out.println("Enter 1 or 2");
+                    continue;
+                }
+                switch (option) {
+                    case 1 -> roleOption = UserRole.CUSTOMER;
+                    case 2 -> roleOption = UserRole.SELLER;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a valid number!");
+            }
+        }
+        userService.add(new User(fullName, username, password, roleOption));
+        currentUser = userService.login(username, password);
         mainDashboard();
     }
 
