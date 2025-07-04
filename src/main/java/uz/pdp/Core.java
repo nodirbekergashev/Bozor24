@@ -5,7 +5,6 @@ import uz.pdp.model.User;
 import uz.pdp.service.*;
 
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Core {
@@ -34,73 +33,55 @@ public class Core {
     }
 
     private static int printWelcomeMenu() {
-        return scannerInt.nextInt();
+        while (true) {
+            System.out.println("""
+                    
+                    Welcome to Bozor24!
+                    1. Register
+                    2. Login
+                    0. Exit
+                    """);
+            System.out.print("Please select an option: ");
+            try {
+                int option = scannerInt.nextInt();
+                if (option < 0 || option > 2) {
+                    System.out.println("Invalid option, please try again.");
+                    continue;
+                }
+                return option;
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter a number.");
+            }
+        }
     }
 
     private static void register() {
-        System.out.println("Enter your full name: ");
-        String fullName = scannerStr.nextLine();
-        String username;
-        while (true) {
-            System.out.println("Enter username: ");
-            username = scannerStr.nextLine();
-            if (userService.isUsernameValid(username)) {
-                break;
-            } else {
-                System.out.println("Invalid username. Try again!");
-                System.out.println("Username should be contains lowercase english letters and '_' ");
-            }
-        }
-        System.out.println("Enter password: ");
-        String password = scannerStr.nextLine();
-        UserRole roleOption = UserRole.CUSTOMER;
-        while (true) {
-            System.out.println("""
-                    Select your role
-                    1. Customer
-                    2. Seller""");
-            try {
-                int option = scannerInt.nextInt();
-                if (option > 2 || option < 0) {
-                    System.out.println("Enter 1 or 2");
-                    continue;
-                }
-                switch (option) {
-                    case 1 -> roleOption = UserRole.CUSTOMER;
-                    case 2 -> roleOption = UserRole.SELLER;
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Enter a valid number!");
-            }
-        }
-        userService.add(new User(fullName, username, password, roleOption));
-        currentUser = userService.login(username, password);
+
         mainDashboard();
     }
 
     private static void mainDashboard() {
-        //todo write a method for check user role and work with switch-case like this
+        System.out.println("Welcome to the main dashboard!");
+        UserRole role = currentUser.getRole();
 
-        if (false) {
-
+        if (role == UserRole.ADMIN) {
             /// admins page
             //todo create menu for admin & write methods for admin like this
-            // adminPage()
+            adminPage();
 
+        } else if (role == UserRole.SELLER) {
             /// Sellers page
             //todo create menu for seller & write methods for seller like this
-            // sellerPage()
+            sellerPage();
         } else {
-            System.out.println("Password or username incorrect!");
+            /// customers page
+            //todo create menu for customer & write methods for customer like this
+            customerPage();
         }
     }
 
     private static void login() {
         while (true) {
-//
-//
-//
             currentUser = new User();
             if (userService == null) {
                 System.out.println("Username or password is incorrect, please try again.");
@@ -188,34 +169,58 @@ public class Core {
         // |-- 2 -> search products by name
         // |
         // |-- 3 -> view cart
-        // |
-        // |-- 4 -> add to cart
-        // |        |-- select product
-        // |        |-- enter quantity
-        // |
-        // |-- 5 -> make order
-        // |        |-- confirm cart
-        // |
-        // |-- 6 -> view my active orders
+        // |        |-- delete product from cart
+        // |        |-- make order
+        // |-- 4 -> view my active orders
         // |        |-- just not delivered orders
         // |
-        // |-- 7 -> view my order history
+        // |-- 5 -> view my order history
         // |        |-- show all orders
         // |
-        // |-- 8 -> change password
+        // |-- 6 -> change password
         // |
-        // |-- 9 -> logout() → back to printWelcomeMenu()
+        // |-- 0 -> logout() → back to printWelcomeMenu()
     }
 
     private static void printAdminMenu() {
-
+        System.out.println("""
+                Admin Menu:
+                1. Manage Users
+                2. Manage Categories
+                3. Manage Products
+                4. Manage Carts
+                5. Search Global
+                6. Change Password
+                7. Logout
+                0. Exit
+                """);
+        System.out.print("Please select an option: ");
     }
 
     private static void printSellerMenu() {
-
+        System.out.println("""
+                Seller Menu:
+                1. Add Product
+                2. View My Products
+                3. Update Product
+                4. Delete Product
+                5. Change Password
+                0. Logout
+                """);
+        System.out.print("Please select an option: ");
     }
 
     private static void printCustomerMenu() {
-
+        System.out.println("""
+                Customer Menu:
+                1. Browse Categories
+                2. Search Products by Name
+                3. View Cart
+                4. View My Active Orders
+                5. View My Order History
+                6. Change Password
+                0. Logout
+                """);
+        System.out.print("Please select an option: ");
     }
 }
