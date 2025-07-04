@@ -7,7 +7,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem {
+public final class CartItem {
     private UUID productId;
     private int quantity;
 

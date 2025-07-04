@@ -11,7 +11,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem extends BaseModel {
-
     private OrderStatus status;
     private UUID cartId;
 }

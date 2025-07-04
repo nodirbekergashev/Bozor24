@@ -16,11 +16,11 @@ public interface BaseService<T> {
 
     void saveToFile();
 
-    default String getCreatedTimeById() {
+    default String getCreatedTimeById(UUID id) {
         return "";
     }
 
-    default String getUpdatedTimeById() {
+    default String getUpdatedTimeById(UUID id) {
         return "";
     }
 }

@@ -5,7 +5,6 @@ import uz.pdp.itemClasses.CartItem;
 import uz.pdp.model.Cart;
 import uz.pdp.model.Order;
 
-import java.util.ArrayList;
 import static uz.pdp.db.Lists.carts;
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +14,6 @@ import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
-
 
 
     public CartService() {
@@ -31,7 +29,6 @@ public class CartService implements BaseService<Cart> {
             System.out.println("Cart for this customer already exists.");
             return false;
         }
-
         carts.add(cart);
         saveToFile();
         return true;
@@ -42,7 +39,7 @@ public class CartService implements BaseService<Cart> {
     public void update(UUID id, Cart cart) {
         Cart existingCart = getById(id);
         if (existingCart != null) {
-            existingCart.setProducts(existingCart.getProducts());
+            existingCart.setProducts(cart.getProducts());
             saveToFile();
         }
 
@@ -82,13 +79,13 @@ public class CartService implements BaseService<Cart> {
     }
 
     @Override
-    public String getCreatedTimeById() {
-        return BaseService.super.getCreatedTimeById();
+    public String getCreatedTimeById(UUID id) {
+        return BaseService.super.getCreatedTimeById(id);
     }
 
     @Override
-    public String getUpdatedTimeById() {
-        return BaseService.super.getUpdatedTimeById();
+    public String getUpdatedTimeById(UUID id) {
+        return BaseService.super.getUpdatedTimeById(id);
     }
 
     public Cart getCartByUserId(UUID userId) {
