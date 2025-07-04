@@ -7,12 +7,24 @@ import java.util.List;
 import java.util.UUID;
 
 import static uz.pdp.db.Lists.categories;
+import static uz.pdp.utils.FileUtil.readFromXml;
+import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class CategoryService implements BaseService<Category> {
+    private static final String pathName = "categories.xml";
+
+    public CategoryService() {
+        categories = readFromXml(pathName, Category.class);
+    }
 
     @Override
     public boolean add(Category category) {
-        return false;
+        if (category == null || isDefined(category.getName())) {
+            return false;
+        }
+        categories.add(category);
+        saveToFile();
+        return true;
     }
 
     @Override
@@ -22,21 +34,36 @@ public class CategoryService implements BaseService<Category> {
 
     @Override
     public boolean delete(UUID id) {
+        Category category = getById(id);
+        if (category != null) {
+            category.setActive(false);
+            killSubcategories(id);
+            saveToFile();
+            return true;
+        }
         return false;
     }
 
     @Override
     public Category getById(UUID id) {
-        return null;
+        return categories.stream()
+                .filter(category -> category.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public List<Category> getAll() {
-        return List.of();
+        return categories;
     }
 
     @Override
     public void saveToFile() {
+        try {
+            writeToXml(pathName,categories);
+        } catch (Exception e) {
+            System.out.println("Error saving file " + e.getMessage());
+        }
 
     }
 
@@ -77,12 +104,4 @@ public class CategoryService implements BaseService<Category> {
             }
         }
     }
-
-    /**
-     * kill subcategories
-     * getCategoryByName
-     * isDefined
-     * getChildCategories
-     * getParentCategory
-     */
 }
