@@ -1,23 +1,31 @@
 package uz.pdp;
 
-import uz.pdp.enums.UserRole;
-import uz.pdp.model.User;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import java.util.ArrayList;
-import java.util.List;
+import uz.pdp.model.User;
+import uz.pdp.bot.Bozor24Bot;
+import uz.pdp.service.ProductService;
+
+import static uz.pdp.db.Lists.users;
+
 
 public class DevControl {
 
     public static void main(String[] args) {
-        List<User> users =  new ArrayList<>();
-
-        User user = new User("Nargiza Allambergenova","thngza","123", UserRole.ADMIN);
-        User user1 = new User("Madina Ismailova","medina","123", UserRole.CUSTOMER);
-        User user2 = new User("Muzaffar Ismailov","muza","123", UserRole.CUSTOMER);
+        ProductService productService = new ProductService();
+        startBot();
 
 
+    }
 
-
-
+    private static void startBot() {
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(new Bozor24Bot());
+            System.out.println("✅ Bozor24Bot ishga tushdi");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

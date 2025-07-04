@@ -1,7 +1,9 @@
 package uz.pdp;
 
+import uz.pdp.enums.UserRole;
 import uz.pdp.model.User;
 import uz.pdp.service.*;
+
 
 import java.util.Scanner;
 
@@ -22,7 +24,7 @@ public class Core {
             switch (option) {
                 case 1 -> register();
 
-                case 2 -> mainDashboard();
+                case 2 -> login();
 
                 case 0 -> System.exit(13);
 
@@ -31,16 +33,19 @@ public class Core {
     }
 
     private static int printWelcomeMenu() {
-        return 0;
+        return scannerInt.nextInt();
     }
 
     private static void register() {
-
+        System.out.println("gdf");
+        scannerStr.nextLine();
+        mainDashboard();
     }
 
     private static void mainDashboard() {
-        if (login()) {
-            //todo write a method for check user role and work with switch-case like this
+        //todo write a method for check user role and work with switch-case like this
+
+        if (false) {
 
             /// admins page
             //todo create menu for admin & write methods for admin like this
@@ -54,9 +59,30 @@ public class Core {
         }
     }
 
-    private static boolean login() {
-        currentUser = new User();
-        return false;
+    private static void login() {
+        while (true) {
+//
+//
+//
+            currentUser = new User();
+            if (userService == null) {
+                System.out.println("Username or password is incorrect, please try again.");
+                System.out.println("Or if you want to register, press 0");
+                int option;
+                try {
+                    option = scannerInt.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Invalid input, please enter a number.");
+                    continue;
+                }
+                if (option == 0) {
+                    return;
+                }
+                continue;
+            }
+            break;
+        }
+        mainDashboard();
     }
 
     private static void adminPage() {
