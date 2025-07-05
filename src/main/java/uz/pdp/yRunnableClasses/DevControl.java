@@ -1,19 +1,14 @@
-package uz.pdp;
+package uz.pdp.yRunnableClasses;
 
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import uz.pdp.model.User;
-import uz.pdp.bot.Bozor24Bot;
-import uz.pdp.service.ProductService;
-
-import static uz.pdp.db.Lists.users;
+import uz.pdp.bot.MainClassBot;
 
 
 public class DevControl {
 
     public static void main(String[] args) {
-        ProductService productService = new ProductService();
         startBot();
 
 
@@ -22,8 +17,8 @@ public class DevControl {
     private static void startBot() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new Bozor24Bot());
-            System.out.println("✅ Bozor24Bot ishga tushdi");
+            botsApi.registerBot(new MainClassBot());
+            System.out.println("✅ MainClassBot ishga tushdi");
         } catch (Exception e) {
             e.printStackTrace();
         }

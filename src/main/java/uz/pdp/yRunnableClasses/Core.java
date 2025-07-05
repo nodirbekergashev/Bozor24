@@ -1,4 +1,4 @@
-package uz.pdp;
+package uz.pdp.yRunnableClasses;
 
 import uz.pdp.enums.UserRole;
 import uz.pdp.model.User;
