@@ -118,4 +118,15 @@ public class UserService implements BaseService<User> {
         }
         return result;
     }
+
+    public List<User> getByRole(UserRole role) {
+        return users.stream()
+                .filter(user -> user.getRole().equals(role))
+                .toList();
+    }
+
+    public void changePassword(User user, String newPassword) {
+        user.setPassword(newPassword);
+        saveToFile();
+    }
 }
