@@ -6,6 +6,7 @@ import uz.pdp.model.Cart;
 import uz.pdp.model.Order;
 
 import static uz.pdp.db.Lists.carts;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +15,6 @@ import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
-
 
     public CartService() {
         carts = readFromJson(pathName, Cart.class);
@@ -32,7 +32,6 @@ public class CartService implements BaseService<Cart> {
         carts.add(cart);
         saveToFile();
         return true;
-
     }
 
     @Override
@@ -42,7 +41,6 @@ public class CartService implements BaseService<Cart> {
             existingCart.setProducts(cart.getProducts());
             saveToFile();
         }
-
     }
 
     @Override

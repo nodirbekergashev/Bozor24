@@ -17,7 +17,6 @@ import static uz.pdp.utils.FileUtil.writeToJson;
 import static uz.pdp.db.Lists.orders;
 
 public class OrderService implements BaseService<Order> {
-
     private static final String pathName = "orders.json";
 
     public OrderService() {

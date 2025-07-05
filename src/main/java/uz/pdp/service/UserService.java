@@ -18,7 +18,6 @@ public class UserService implements BaseService<User> {
         users = readFromXml(pathName,User.class);
     }
 
-
     @Override
     public boolean add(User user) {
         boolean existing = users.stream()
@@ -42,7 +41,6 @@ public class UserService implements BaseService<User> {
             u.setRole(user.getRole());
             saveToFile();
         }
-
     }
 
     @Override
@@ -76,7 +74,6 @@ public class UserService implements BaseService<User> {
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
-
     }
 
     @Override

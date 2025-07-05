@@ -29,7 +29,6 @@ public class CategoryService implements BaseService<Category> {
 
     @Override
     public void update(UUID id, Category category) {
-
     }
 
     @Override
@@ -60,11 +59,10 @@ public class CategoryService implements BaseService<Category> {
     @Override
     public void saveToFile() {
         try {
-            writeToXml(pathName,categories);
+            writeToXml(pathName, categories);
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
-
     }
 
     public Category getCategoryByName(String name) {
@@ -93,7 +91,7 @@ public class CategoryService implements BaseService<Category> {
     }
 
     public void killSubcategories(UUID parentId) {
-        while(true) {
+        while (true) {
             List<Category> childCategories = getChildCategories(parentId);
             if (childCategories.isEmpty()) {
                 break;
