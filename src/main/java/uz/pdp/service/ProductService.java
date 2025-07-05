@@ -101,4 +101,20 @@ public class ProductService implements BaseService<Product> {
                 .filter(product -> product.getSellerId().equals(sellerId))
                 .collect(Collectors.toList());
     }
+
+    public List<Product> searchByProductName(String keyword) {
+        String search = keyword.trim().toLowerCase();
+        return products.stream()
+                .filter(product -> product.isActive() && product.getName().toLowerCase().contains(search))
+                .collect(Collectors.toList());
+    }
+
+    public Product getByProductName(String productName) {
+        return products.stream()
+                .filter(product -> product.isActive() && product.getName().equalsIgnoreCase(productName))
+                .findFirst()
+                .orElse(null);
+    }
+
+
 }
