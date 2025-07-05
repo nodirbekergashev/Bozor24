@@ -1,0 +1,102 @@
+<ArrayList>
+  <item>
+    <id>082abe68-b2fc-43b3-b0a5-4cd89049f394</id>
+    <createdAt>1751634829638</createdAt>
+    <updatedAt>1751634829638</updatedAt>
+    <fullName>Nargiza Allambergenova</fullName>
+    <userName>thngza</userName>
+    <password>1234</password>
+    <role>CUSTOMER</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>9584c336-e977-4914-890a-d02621ed91a3</id>
+    <createdAt>1751634872944</createdAt>
+    <updatedAt>1751634872944</updatedAt>
+    <fullName>wejjd</fullName>
+    <userName>dehdhe</userName>
+    <password>123</password>
+    <role>SELLER</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>0bba537c-5800-4814-a1f4-68077aeacffb</id>
+    <createdAt>1751650497668</createdAt>
+    <updatedAt>1751650497668</updatedAt>
+    <fullName>Aziz Allambergenov</fullName>
+    <userName>azizbek</userName>
+    <password>123</password>
+    <role>CUSTOMER</role>
+    <active>false</active>
+  </item>
+  <item>
+    <id>6566e56e-b2d4-4454-9197-a68a0e207274</id>
+    <createdAt>1751665220046</createdAt>
+    <updatedAt>1751665220046</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>atabek</userName>
+    <password>123</password>
+    <role>SELLER</role>
+    <active>false</active>
+  </item>
+  <item>
+    <id>31002662-df9c-4902-8813-78017ee3c7d9</id>
+    <createdAt>1751666315716</createdAt>
+    <updatedAt>1751666315716</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>atabek</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>96c727e8-e2d8-4290-9584-5822c3c01460</id>
+    <createdAt>1751670644559</createdAt>
+    <updatedAt>1751670644559</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>atabek</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>8d294b08-b2f6-4eeb-8408-5dfc9cdad659</id>
+    <createdAt>1751701854989</createdAt>
+    <updatedAt>1751701854989</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>atabek</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>1489a3d6-62de-4480-aacb-a7cfadce3cdd</id>
+    <createdAt>1751701911779</createdAt>
+    <updatedAt>1751701911779</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>ata</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>26ebb8aa-cdcf-4561-a367-d3025aaeec08</id>
+    <createdAt>1751702103269</createdAt>
+    <updatedAt>1751702103269</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>ata</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+  <item>
+    <id>aec73dfc-05a8-4f4a-9704-1e1cbd10e699</id>
+    <createdAt>1751702121807</createdAt>
+    <updatedAt>1751702121807</updatedAt>
+    <fullName>Atabek M</fullName>
+    <userName>ata</userName>
+    <password>123</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </item>
+</ArrayList>
