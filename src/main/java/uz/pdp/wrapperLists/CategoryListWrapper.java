@@ -13,6 +13,8 @@ import uz.pdp.model.Category;
 import java.util.List;
 
 @JacksonXmlRootElement(localName = "Categories")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class CategoryListWrapper {

@@ -2,6 +2,7 @@ package uz.pdp.service;
 
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.model.Category;
+import uz.pdp.wrapperLists.CategoryListWrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +30,7 @@ public class CategoryService implements BaseService<Category> {
 
     @Override
     public void update(UUID id, Category category) {
+
     }
 
     @Override
@@ -36,7 +38,7 @@ public class CategoryService implements BaseService<Category> {
         Category category = getById(id);
         if (category != null) {
             category.setActive(false);
-            killSubcategories(id);
+            killSubcategories(category.getId());
             saveToFile();
             return true;
         }
@@ -59,10 +61,11 @@ public class CategoryService implements BaseService<Category> {
     @Override
     public void saveToFile() {
         try {
-            writeToXml(pathName, categories);
+            writeToXml(pathName, new CategoryListWrapper(categories));
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
+
     }
 
     public Category getCategoryByName(String name) {
@@ -77,7 +80,7 @@ public class CategoryService implements BaseService<Category> {
                 .anyMatch(category -> category.getName().equalsIgnoreCase(name));
     }
 
-    public List<Category> getChildCategories(UUID parentId) {
+    public List<Category> getSubCategories(UUID parentId) {
         return categories.stream()
                 .filter(category -> category.getParentId().equals(parentId))
                 .toList();
@@ -91,15 +94,14 @@ public class CategoryService implements BaseService<Category> {
     }
 
     public void killSubcategories(UUID parentId) {
-        while (true) {
-            List<Category> childCategories = getChildCategories(parentId);
-            if (childCategories.isEmpty()) {
-                break;
-            }
-            for (Category child : childCategories) {
-                child.setActive(false);
-                killSubcategories(child.getId());
-            }
+        List<Category> childCategories = getSubCategories(parentId);
+        if (childCategories.isEmpty()) {
+            return;
+        }
+        for (Category child : childCategories) {
+            child.setActive(false);
+            killSubcategories(child.getId());
         }
     }
+
 }

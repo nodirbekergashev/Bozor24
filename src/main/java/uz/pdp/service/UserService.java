@@ -3,6 +3,8 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.enums.UserRole;
 import uz.pdp.model.User;
+import uz.pdp.wrapperLists.CategoryListWrapper;
+import uz.pdp.wrapperLists.UserListWrapper;
 
 import java.util.List;
 import java.util.UUID;
@@ -70,7 +72,7 @@ public class UserService implements BaseService<User> {
     @Override
     public void saveToFile() {
         try {
-            writeToXml(pathName, users);
+            writeToXml(pathName, new UserListWrapper(users));
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
