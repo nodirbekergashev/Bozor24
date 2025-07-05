@@ -13,7 +13,6 @@ import static uz.pdp.db.Lists.products;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class ProductService implements BaseService<Product> {
-
     private static final String pathname = "orders.json";
 
     public ProductService() {
