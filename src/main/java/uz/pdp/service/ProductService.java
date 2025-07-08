@@ -3,20 +3,16 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 import static uz.pdp.utils.FileUtil.readFromJson;
 import static uz.pdp.db.Lists.products;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class ProductService implements BaseService<Product> {
-    private static final String pathname = "orders.json";
+    private static final String PATHNAME = "products.json";
 
-    public ProductService() {
-        readFromJson(pathname, Product.class);
+    static {products = readFromJson(PATHNAME, Product.class);
     }
 
     @Override
@@ -39,7 +35,7 @@ public class ProductService implements BaseService<Product> {
             old.setQuantity(product.getQuantity());
             old.setUpdatedAt(product.getUpdatedAt());
             old.setActive(product.isActive());
-            old.setCatId(product.getCatId());
+            old.setCategoryId(product.getCategoryId());
             old.setCreatedAt(product.getCreatedAt());
             saveToFile();
         }
@@ -70,7 +66,7 @@ public class ProductService implements BaseService<Product> {
 
     @Override
     public void saveToFile() {
-        writeToJson(pathname, products);
+        writeToJson(PATHNAME, products);
     }
 
     @Override
@@ -86,26 +82,26 @@ public class ProductService implements BaseService<Product> {
     public List<Product> getByCategory(String categoryName) {
         return products.stream()
                 .filter(product -> product.getName().equals(categoryName) && product.isActive())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public boolean isDefined(UUID sellerId, String productName) {
         return products.stream()
                 .anyMatch(product -> product.getSellerId().equals(sellerId) &&
-                product.getName().equalsIgnoreCase(productName));
+                        product.getName().equalsIgnoreCase(productName));
     }
 
     public List<Product> getProductBySellerId(UUID sellerId) {
         return products.stream()
                 .filter(product -> product.getSellerId().equals(sellerId))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Product> searchByProductName(String keyword) {
         String search = keyword.trim().toLowerCase();
         return products.stream()
                 .filter(product -> product.isActive() && product.getName().toLowerCase().contains(search))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Product getByProductName(String productName) {

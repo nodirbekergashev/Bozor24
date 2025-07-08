@@ -1,0 +1,42 @@
+<Users>
+  <user>
+    <id>34d085ec-4ac8-4403-ba26-0e4c3b27b968</id>
+    <createdAt>1751988191638</createdAt>
+    <updatedAt>1751988191638</updatedAt>
+    <fullName></fullName>
+    <userName>admin</userName>
+    <password>1314</password>
+    <role>ADMIN</role>
+    <active>true</active>
+  </user>
+  <user>
+    <id>ec36fc1d-b10e-4aaf-b69b-ab928a6507dc</id>
+    <createdAt>1751988196204</createdAt>
+    <updatedAt>1751988196204</updatedAt>
+    <fullName>Nodirbek null</fullName>
+    <userName></userName>
+    <password></password>
+    <role>CUSTOMER</role>
+    <active>true</active>
+  </user>
+  <user>
+    <id>227cba7f-f945-498e-b0b1-45d77e4221ca</id>
+    <createdAt>1751988274229</createdAt>
+    <updatedAt>1751988274229</updatedAt>
+    <fullName>☕️ null</fullName>
+    <userName></userName>
+    <password></password>
+    <role>CUSTOMER</role>
+    <active>true</active>
+  </user>
+  <user>
+    <id>6b6cee31-aa6a-47d5-a399-1cb10a2856f1</id>
+    <createdAt>1751988277914</createdAt>
+    <updatedAt>1751988277914</updatedAt>
+    <fullName>Ozodbek null</fullName>
+    <userName></userName>
+    <password></password>
+    <role>CUSTOMER</role>
+    <active>true</active>
+  </user>
+</Users>

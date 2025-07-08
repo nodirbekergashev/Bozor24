@@ -14,7 +14,6 @@ public class Product extends BaseModel {
     private String name;
     private int quantity;
     private double price;
-    private UUID catId;
+    private UUID categoryId;
     private UUID sellerId;
-    private Category category;
 }

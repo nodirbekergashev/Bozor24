@@ -1,0 +1,20 @@
+<Users>
+  <user>
+    <chatId>5589738816</chatId>
+    <userId>5589738816</userId>
+    <userBaseId>ec36fc1d-b10e-4aaf-b69b-ab928a6507dc</userBaseId>
+    <active>true</active>
+  </user>
+  <user>
+    <chatId>191034151</chatId>
+    <userId>191034151</userId>
+    <userBaseId>227cba7f-f945-498e-b0b1-45d77e4221ca</userBaseId>
+    <active>true</active>
+  </user>
+  <user>
+    <chatId>6932479965</chatId>
+    <userId>6932479965</userId>
+    <userBaseId>6b6cee31-aa6a-47d5-a399-1cb10a2856f1</userBaseId>
+    <active>true</active>
+  </user>
+</Users>

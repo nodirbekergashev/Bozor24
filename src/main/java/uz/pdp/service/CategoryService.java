@@ -14,8 +14,7 @@ import static uz.pdp.utils.FileUtil.writeToXml;
 public class CategoryService implements BaseService<Category> {
     private static final String pathName = "categories.xml";
 
-    public CategoryService() {
-        categories = readFromXml(pathName, Category.class);
+    static {categories = readFromXml(pathName, Category.class);
     }
 
     @Override

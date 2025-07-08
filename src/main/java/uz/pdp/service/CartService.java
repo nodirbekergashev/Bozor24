@@ -16,7 +16,7 @@ import static uz.pdp.utils.FileUtil.writeToJson;
 public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
 
-    public CartService() {
+    static {
         carts = readFromJson(pathName, Cart.class);
     }
 

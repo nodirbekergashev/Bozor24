@@ -3,11 +3,11 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.enums.UserRole;
 import uz.pdp.model.User;
-import uz.pdp.wrapperLists.CategoryListWrapper;
 import uz.pdp.wrapperLists.UserListWrapper;
 
 import java.util.List;
 import java.util.UUID;
+
 import static uz.pdp.db.Lists.users;
 
 import static uz.pdp.utils.FileUtil.readFromXml;
@@ -16,8 +16,11 @@ import static uz.pdp.utils.FileUtil.writeToXml;
 public class UserService implements BaseService<User> {
     private static final String pathName = "users.xml";
 
-    public UserService() {
-        users = readFromXml(pathName,User.class);
+    static {
+        users = readFromXml(pathName, User.class);
+        if (users.isEmpty()) {
+            users.add(new User("", "admin", "1314", UserRole.ADMIN));
+        }
     }
 
     @Override
@@ -33,10 +36,22 @@ public class UserService implements BaseService<User> {
         return true;
     }
 
+    public User addBotUser(User user) {
+        boolean existing = users.stream()
+                .anyMatch(u -> u.equals(user));
+        if (existing) {
+            System.out.println("This user already exists!");
+            return null;
+        }
+        users.add(user);
+        saveToFile();
+        return user;
+    }
+
     @Override
     public void update(UUID id, User user) {
         User u = getById(id);
-        if (u != null){
+        if (u != null) {
             u.setFullName(user.getFullName());
             u.setUserName(user.getUserName());
             u.setPassword(user.getPassword());
@@ -90,6 +105,7 @@ public class UserService implements BaseService<User> {
 
     public User login(String username, String password) {
         return users.stream()
+                .filter(User::isActive)
                 .filter(user -> user.getUserName().equals(username) && user.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
@@ -107,12 +123,13 @@ public class UserService implements BaseService<User> {
     }
 
     public boolean changeUserRole(UUID id, UserRole newRole) {
-        boolean result =  users.stream()
+        boolean result = users.stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .map(user -> {
                     user.setRole(newRole);
-                            return true;})
+                    return true;
+                })
                 .orElse(false);
 
         if (result) {

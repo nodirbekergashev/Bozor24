@@ -19,8 +19,7 @@ import static uz.pdp.db.Lists.orders;
 public class OrderService implements BaseService<Order> {
     private static final String pathName = "orders.json";
 
-    public OrderService() {
-        orders = readFromJson(pathName, Order.class);
+    static {orders = readFromJson(pathName, Order.class);
     }
 
     @Override

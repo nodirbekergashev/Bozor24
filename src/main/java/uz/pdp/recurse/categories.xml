@@ -1,0 +1,211 @@
+<Categories>
+    <category>
+        <id>b646545e-daf9-4d71-bb12-d78b59b49604</id>
+        <createdAt>1751805719863</createdAt>
+        <updatedAt>1751805719863</updatedAt>
+        <name>Electronics</name>
+        <parentId>00000000-0000-0000-0000-000000000000</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789001</id>
+        <createdAt>1751805719864</createdAt>
+        <updatedAt>1751805719864</updatedAt>
+        <name>Smartphones</name>
+        <parentId>b646545e-daf9-4d71-bb12-d78b59b49604</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789003</id>
+        <createdAt>1751805719866</createdAt>
+        <updatedAt>1751805719866</updatedAt>
+        <name>Samsung</name>
+        <parentId>1a2b3c4d-5e6f-7890-abcd-123456789001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789004</id>
+        <createdAt>1751805719867</createdAt>
+        <updatedAt>1751805719867</updatedAt>
+        <name>Apple</name>
+        <parentId>1a2b3c4d-5e6f-7890-abcd-123456789001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789002</id>
+        <createdAt>1751805719865</createdAt>
+        <updatedAt>1751805719865</updatedAt>
+        <name>Laptops</name>
+        <parentId>b646545e-daf9-4d71-bb12-d78b59b49604</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789005</id>
+        <createdAt>1751805719868</createdAt>
+        <updatedAt>1751805719868</updatedAt>
+        <name>HP</name>
+        <parentId>1a2b3c4d-5e6f-7890-abcd-123456789002</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>1a2b3c4d-5e6f-7890-abcd-123456789006</id>
+        <createdAt>1751805719869</createdAt>
+        <updatedAt>1751805719869</updatedAt>
+        <name>Dell</name>
+        <parentId>1a2b3c4d-5e6f-7890-abcd-123456789002</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+
+
+    <category>
+        <id>fde72925-9884-404b-bf9f-24226f5371a9</id>
+        <createdAt>1751805719954</createdAt>
+        <updatedAt>1751805719954</updatedAt>
+        <name>Toys</name>
+        <parentId>00000000-0000-0000-0000-000000000000</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890001</id>
+        <createdAt>1751805719955</createdAt>
+        <updatedAt>1751805719955</updatedAt>
+        <name>Dolls</name>
+        <parentId>fde72925-9884-404b-bf9f-24226f5371a9</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890002</id>
+        <createdAt>1751805719956</createdAt>
+        <updatedAt>1751805719956</updatedAt>
+        <name>Baby</name>
+        <parentId>2b3c4d5e-6f7a-8901-bcde-234567890001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890003</id>
+        <createdAt>1751805719957</createdAt>
+        <updatedAt>1751805719957</updatedAt>
+        <name>Fashion</name>
+        <parentId>2b3c4d5e-6f7a-8901-bcde-234567890001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890004</id>
+        <createdAt>1751805719958</createdAt>
+        <updatedAt>1751805719958</updatedAt>
+        <name>Teddies</name>
+        <parentId>fde72925-9884-404b-bf9f-24226f5371a9</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890005</id>
+        <createdAt>1751805719959</createdAt>
+        <updatedAt>1751805719959</updatedAt>
+        <name>Classic</name>
+        <parentId>2b3c4d5e-6f7a-8901-bcde-234567890004</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>2b3c4d5e-6f7a-8901-bcde-234567890006</id>
+        <createdAt>1751805719960</createdAt>
+        <updatedAt>1751805719960</updatedAt>
+        <name>Collectible</name>
+        <parentId>2b3c4d5e-6f7a-8901-bcde-234567890004</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+
+    <category>
+        <id>6f343fbb-eee7-4669-9359-e586be101459</id>
+        <createdAt>1751805719863</createdAt>
+        <updatedAt>1751805719863</updatedAt>
+        <name>Sport</name>
+        <parentId>00000000-0000-0000-0000-000000000000</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900001</id>
+        <createdAt>1751805719864</createdAt>
+        <updatedAt>1751805719864</updatedAt>
+        <name>Rackets</name>
+        <parentId>6f343fbb-eee7-4669-9359-e586be101459</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900002</id>
+        <createdAt>1751805719865</createdAt>
+        <updatedAt>1751805719865</updatedAt>
+        <name>Tennis</name>
+        <parentId>3c4d5e6f-7a8b-9012-cdef-345678900001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900003</id>
+        <createdAt>1751805719866</createdAt>
+        <updatedAt>1751805719866</updatedAt>
+        <name>Badminton</name>
+        <parentId>3c4d5e6f-7a8b-9012-cdef-345678900001</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900004</id>
+        <createdAt>1751805719867</createdAt>
+        <updatedAt>1751805719867</updatedAt>
+        <name>Balls</name>
+        <parentId>6f343fbb-eee7-4669-9359-e586be101459</parentId>
+        <hasProducts>false</hasProducts>
+        <active>true</active>
+    </category>
+
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900005</id>
+        <createdAt>1751805719868</createdAt>
+        <updatedAt>1751805719868</updatedAt>
+        <name>Football</name>
+        <parentId>3c4d5e6f-7a8b-9012-cdef-345678900004</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+    <category>
+        <id>3c4d5e6f-7a8b-9012-cdef-345678900006</id>
+        <createdAt>1751805719869</createdAt>
+        <updatedAt>1751805719869</updatedAt>
+        <name>Basketball</name>
+        <parentId>3c4d5e6f-7a8b-9012-cdef-345678900004</parentId>
+        <hasProducts>true</hasProducts>
+        <active>true</active>
+    </category>
+
+</Categories>

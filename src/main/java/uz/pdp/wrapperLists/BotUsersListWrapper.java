@@ -3,21 +3,19 @@ package uz.pdp.wrapperLists;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import uz.pdp.model.Category;
+import lombok.*;
+import uz.pdp.bot.botModel.BotUser;
+import uz.pdp.model.User;
 
 import java.util.List;
 
-@JacksonXmlRootElement(localName = "Categories")
-@AllArgsConstructor
-@NoArgsConstructor
+@JacksonXmlRootElement(localName = "Users")
 @Getter
 @Setter
-public class CategoryListWrapper {
-     @JacksonXmlProperty(localName = "category")
+@NoArgsConstructor
+@AllArgsConstructor
+public class BotUsersListWrapper {
+    @JacksonXmlProperty(localName = "user")
     @JacksonXmlElementWrapper(useWrapping = false)
-     private List<Category> categoryList;
+    private List<BotUser> categoryList;
 }
