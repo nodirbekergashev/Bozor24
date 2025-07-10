@@ -18,7 +18,7 @@ public class Lists {
         products = readFromJson("products.json", Product.class);
         orders = readFromJson("orders.json", Order.class);
         carts = readFromJson("carts.json", Cart.class);
-        users = readFromXml("users.json", User.class);
+        users = readFromXml("users.xml", User.class);
     }
 //
 //    static {

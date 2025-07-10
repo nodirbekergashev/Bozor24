@@ -9,6 +9,7 @@ public enum CallBackQueryStarting {
     PRODUCT("PRODUCT",7),
     CART("CART",4),
     USER_ROLE("USER_ROLE",9),
+    ORDER("ORDER",5),
     ;
 
     private final String value;

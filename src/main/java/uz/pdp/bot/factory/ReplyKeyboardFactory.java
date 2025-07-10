@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReplyAndInlineKeyboardFactory {
+public class ReplyKeyboardFactory {
 
     public static ReplyKeyboardMarkup createReplyKeyboard(List<String> buttons, int columns) {
         ReplyKeyboardMarkup r = new ReplyKeyboardMarkup();
         r.setResizeKeyboard(true);
-        r.setOneTimeKeyboard(false);
         List<KeyboardRow> rows = new ArrayList<>();
         r.setKeyboard(rows);
 

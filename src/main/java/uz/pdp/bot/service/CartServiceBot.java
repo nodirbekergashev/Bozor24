@@ -7,12 +7,11 @@ import java.util.*;
 
 import static uz.pdp.db.Lists.carts;
 import static uz.pdp.utils.FileUtil.writeToJson;
-import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class CartServiceBot {
 
     public Cart getCartByUserId(UUID userId) {
-        if (userId !=null) {
+        if (userId != null) {
             if (carts == null) {
                 carts = new ArrayList<>();
             }
@@ -34,11 +33,26 @@ public class CartServiceBot {
         return null;
     }
 
+    public Cart getCartById(UUID id) {
+        return carts.stream()
+                .filter(cart -> cart.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void clearCart(UUID cartId) {
+        Cart cartById = getCartById(cartId);
+        if (cartById != null) {
+            cartById.setProducts(new ArrayList<>());
+            saveToFile();
+
+        }
+    }
+
     public void saveCart(Cart cart) {
         if (cart != null && cart.getUserId() != null) {
             carts.removeIf(c -> c.getUserId().equals(cart.getUserId()));
             carts.add(cart);
-            System.out.println("✅ Cart saved: " + cart.getProducts().size() + " items");
             saveToFile();
         }
     }

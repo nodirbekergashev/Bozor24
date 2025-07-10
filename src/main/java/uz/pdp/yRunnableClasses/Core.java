@@ -1,8 +1,5 @@
 package uz.pdp.yRunnableClasses;
 
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import uz.pdp.bot.MainClassBot;
 import uz.pdp.enums.UserRole;
 import uz.pdp.model.Cart;
 import uz.pdp.model.Category;
@@ -25,7 +22,6 @@ public class Core {
     static UserService userService = new UserService();
     static CartService cartService = new CartService();
     static ProductService productService = new ProductService();
-    static OrderService orderService = new OrderService();
     static CategoryService categoryService = new CategoryService();
     static final String INVALID_INPUT_ERROR = "Invalid input, please enter a number.";
     static User currentUser;

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static uz.pdp.db.Lists.products;
+import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class ProductServiceBot {
     public List<Product> getProductsByCategoryId(UUID id) {
@@ -21,5 +22,15 @@ public class ProductServiceBot {
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void editProductCount(UUID productId, int quantity){
+        Product editedProduct = getProductById(productId);
+        editedProduct.setQuantity(editedProduct.getQuantity() - quantity);
+        saveToFile();
+    }
+
+    private void saveToFile() {
+        writeToJson("products.json",products);
     }
 }

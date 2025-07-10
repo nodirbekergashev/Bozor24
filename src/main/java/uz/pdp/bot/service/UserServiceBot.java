@@ -15,18 +15,18 @@ import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class UserServiceBot {
     private final UserService userService = new UserService();
-    private static final String PATH_NAME = "botUsers.xml";
+    private static final String PATH_NAME = "botRecurse/botUsers.xml";
     static final List<BotUser> BOT_USERS = new ArrayList<>();
 
     static {
         readFromXml(PATH_NAME, BotUser.class);
     }
 
-    public void add(String fullName, Long userId, UserRole role, Long chatId) {
+    public void add(String phoneNumber, String fullName, Long userId, UserRole role, Long chatId) {
         User user = userService.addBotUser(new User(fullName, "", "", role));
         if (user != null) {
             UUID id = user.getId();
-            BotUser u = new BotUser(chatId, userId, id);
+            BotUser u = new BotUser(phoneNumber, fullName, chatId, userId, id);
             BOT_USERS.add(u);
             saveToFile();
         }
@@ -40,6 +40,11 @@ public class UserServiceBot {
             return null;
         }
         return user.getUserBaseId();
+    }
+
+    public boolean isUseBefore(Long userId) {
+        return BOT_USERS.stream()
+                .anyMatch(botUser -> botUser.getUserId().equals(userId));
     }
 
     public void saveToFile() {
