@@ -112,7 +112,7 @@ public class Core {
                 log.info("Enter a valid number!");
             }
         }
-        userService.add(new User(fullName, username, password, roleOption));
+        userService.add(new User(fullName,"", username, password, roleOption));
         currentUser = userService.login(username, password);
         log.info("Registration successful! Welcome, {} !\n", currentUser.getFullName());
         mainDashboard();

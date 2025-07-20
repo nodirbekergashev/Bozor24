@@ -1,60 +1,44 @@
 <Users>
   <user>
-    <id>c9027ec3-ab67-417d-b6da-597825fca4ff</id>
-    <createdAt>1752154281682</createdAt>
-    <updatedAt>1752154281682</updatedAt>
+    <id>a655569c-ee84-48c6-872c-b3311bbcaf55</id>
+    <createdAt>1752249357588</createdAt>
+    <updatedAt>1752249357588</updatedAt>
     <fullName></fullName>
     <userName>admin</userName>
+    <phoneNumber>0411</phoneNumber>
     <password>1314</password>
     <role>ADMIN</role>
     <active>true</active>
   </user>
   <user>
-    <id>e48df866-b8a1-4b8f-b611-d2c6fcd46ed3</id>
-    <createdAt>1752154303231</createdAt>
-    <updatedAt>1752154303231</updatedAt>
-    <fullName>Nodirbek null</fullName>
-    <userName></userName>
+    <id>25378db7-13c9-4c93-b365-837576463e20</id>
+    <createdAt>1752249377354</createdAt>
+    <updatedAt>1752249377354</updatedAt>
+    <fullName>Nodirbek</fullName>
+    <userName>Nodirbek_1304</userName>
+    <phoneNumber>+998904171916</phoneNumber>
     <password></password>
     <role>CUSTOMER</role>
     <active>true</active>
   </user>
   <user>
-    <id>7941a87b-523f-4438-b157-29d343b6775c</id>
-    <createdAt>1752154734595</createdAt>
-    <updatedAt>1752154734595</updatedAt>
-    <fullName>Nodirbek null</fullName>
-    <userName></userName>
+    <id>0b58aad4-94cd-403b-bfba-395ed50a8df5</id>
+    <createdAt>1752298752069</createdAt>
+    <updatedAt>1752298752069</updatedAt>
+    <fullName>☕️</fullName>
+    <userName>byahkee</userName>
+    <phoneNumber>998909585899</phoneNumber>
     <password></password>
     <role>CUSTOMER</role>
     <active>true</active>
   </user>
   <user>
-    <id>8c8f5dde-24b5-4572-8338-a0a3e03179ee</id>
-    <createdAt>1752157076309</createdAt>
-    <updatedAt>1752157076309</updatedAt>
-    <fullName>Nodirbek null</fullName>
-    <userName></userName>
-    <password></password>
-    <role>CUSTOMER</role>
-    <active>true</active>
-  </user>
-  <user>
-    <id>522b458d-92ab-4337-a0ce-a1d6cd6071aa</id>
-    <createdAt>1752157093925</createdAt>
-    <updatedAt>1752157093925</updatedAt>
-    <fullName>NarA null</fullName>
-    <userName></userName>
-    <password></password>
-    <role>CUSTOMER</role>
-    <active>true</active>
-  </user>
-  <user>
-    <id>962a5790-6ce2-44af-ab57-dd0d778b33f2</id>
-    <createdAt>1752157153830</createdAt>
-    <updatedAt>1752157153830</updatedAt>
-    <fullName>Aziza 🌺 null</fullName>
-    <userName></userName>
+    <id>af7c0000-c0a7-4ac7-a992-5df4112a4cb7</id>
+    <createdAt>1752654877367</createdAt>
+    <updatedAt>1752654877367</updatedAt>
+    <fullName>&lt;•••></fullName>
+    <userName>azimkhojayev_a</userName>
+    <phoneNumber>998953532232</phoneNumber>
     <password></password>
     <role>CUSTOMER</role>
     <active>true</active>

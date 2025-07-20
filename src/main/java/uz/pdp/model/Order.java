@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Order extends BaseModel {
     private UUID userId;
+    private String orderNumber;
     private List<OrderItem> ordersByUser;
     private double totalPrice;
     private OrderStatus status;

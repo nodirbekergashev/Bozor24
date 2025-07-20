@@ -1,39 +1,15 @@
 [ {
-  "id" : "2b352b51-1371-48c2-a8d5-678f54c006de",
-  "createdAt" : 1752154347941,
-  "updatedAt" : 1752154347941,
-  "userId" : "e48df866-b8a1-4b8f-b611-d2c6fcd46ed3",
+  "id" : "68dfbd57-c716-4512-9f6d-6881aaad0923",
+  "createdAt" : 1752298823148,
+  "updatedAt" : 1752298823148,
+  "userId" : "0b58aad4-94cd-403b-bfba-395ed50a8df5",
   "products" : [ ],
   "active" : true
 }, {
-  "id" : "0ed9cff4-5ad6-4740-a760-3ccb510175db",
-  "createdAt" : 1752154752029,
-  "updatedAt" : 1752154752029,
-  "userId" : "7941a87b-523f-4438-b157-29d343b6775c",
+  "id" : "31cd4d99-001f-4ccc-8229-a8964b3a3d36",
+  "createdAt" : 1752249717479,
+  "updatedAt" : 1752249717479,
+  "userId" : "25378db7-13c9-4c93-b365-837576463e20",
   "products" : [ ],
-  "active" : true
-}, {
-  "id" : "241369a2-ed3d-4f95-84bb-ecc5927ab43b",
-  "createdAt" : 1752157166331,
-  "updatedAt" : 1752157166331,
-  "userId" : "522b458d-92ab-4337-a0ce-a1d6cd6071aa",
-  "products" : [ ],
-  "active" : true
-}, {
-  "id" : "799462f2-9d37-4363-9219-1a5a04845260",
-  "createdAt" : 1752157155322,
-  "updatedAt" : 1752157155322,
-  "userId" : "8c8f5dde-24b5-4572-8338-a0a3e03179ee",
-  "products" : [ ],
-  "active" : true
-}, {
-  "id" : "863f6ce8-9fc1-4ef1-8017-f1eb05c8d1cc",
-  "createdAt" : 1752157292758,
-  "updatedAt" : 1752157292758,
-  "userId" : "962a5790-6ce2-44af-ab57-dd0d778b33f2",
-  "products" : [ {
-    "productId" : "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d57",
-    "quantity" : 2
-  } ],
   "active" : true
 } ]

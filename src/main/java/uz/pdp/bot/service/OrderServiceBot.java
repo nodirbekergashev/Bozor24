@@ -1,6 +1,5 @@
 package uz.pdp.bot.service;
 
-import uz.pdp.enums.OrderStatus;
 import uz.pdp.itemClasses.CartItem;
 import uz.pdp.itemClasses.OrderItem;
 import uz.pdp.model.Cart;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static uz.pdp.db.Lists.orders;
+import static uz.pdp.db.Lists.ORDERS;
 import static uz.pdp.enums.OrderStatus.PENDING;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
@@ -20,7 +19,7 @@ public class OrderServiceBot {
     ProductService service = new ProductService();
 
     public List<Order> getOrdersByUserId(UUID id) {
-        return orders.stream()
+        return ORDERS.stream()
                 .filter(order -> order.getUserId().equals(id))
                 .toList();
     }
@@ -29,6 +28,7 @@ public class OrderServiceBot {
         List<OrderItem> items = new ArrayList<>();
         OrderItem orderItem;
         double totalPrice = 0;
+        String orderNum = String.valueOf(Math.random()).substring(3);
         Product product;
         for (CartItem item : cart.getProducts()) {
             product = service.getById(item.getProductId());
@@ -38,18 +38,18 @@ public class OrderServiceBot {
             orderItem.setProductCount(item.getQuantity());
             items.add(orderItem);
         }
-        orders.add(new Order(userId, items,totalPrice,PENDING));
-        return new Order(userId, items,totalPrice,PENDING);
+        ORDERS.add(new Order(userId, orderNum, items, totalPrice, PENDING));
+        return new Order(userId, orderNum, items, totalPrice, PENDING);
     }
 
     public List<Order> getUserOrders(UUID id) {
-        return orders.stream()
+        return ORDERS.stream()
                 .filter(order -> order.getUserId().equals(id))
                 .toList();
     }
 
 
     public void saveToFile() {
-        writeToJson("orders.json", orders);
+        writeToJson("orders.json", ORDERS);
     }
 }
