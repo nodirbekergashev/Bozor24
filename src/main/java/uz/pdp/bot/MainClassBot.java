@@ -2,8 +2,7 @@ package uz.pdp.bot;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.NonNull;
-import org.jetbrains.annotations.NotNull;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
@@ -33,7 +32,6 @@ import uz.pdp.model.Order;
 import uz.pdp.model.Product;
 import uz.pdp.service.UserService;
 
-import java.awt.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -49,8 +47,11 @@ import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class MainClassBot extends TelegramLongPollingBot {
     private static final String BOT_USERNAME = "onlinemarket24_7bot";
-    private static final String BOT_TOKEN = "***REMOVED***";
     static CategoryServiceBot categoryServiceBot = new CategoryServiceBot();
+    private static final Dotenv DOTENV = Dotenv.load();
+
+
+    private static   final String BOT_TOKEN = DOTENV.get("BOT_TOKEN");
     static ProductServiceBot productServiceBot = new ProductServiceBot();
     static UserServiceBot userServiceBot = new UserServiceBot();
     static CartServiceBot cartServiceBot = new CartServiceBot();
