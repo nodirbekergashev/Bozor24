@@ -14,44 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 
 public class User extends BaseModel {
-
     private String fullName;
     private String userName;
+    private String phoneNumber;
     private String password;
     private UserRole role;
-
-    @Override
-    public UUID getId() {
-        return super.getId();
-    }
-
-    @Override
-    public boolean isActive() {
-        return super.isActive();
-    }
-
-    @Override
-    public Date getCreatedAt() {
-        return super.getCreatedAt();
-    }
-
-    @Override
-    public Date getUpdatedAt() {
-        return super.getUpdatedAt();
-    }
-
-    @Override
-    public void setActive(boolean isActive) {
-        super.setActive(isActive);
-    }
-
-    @Override
-    public void setCreatedAt(Date createdAt) {
-        super.setCreatedAt(createdAt);
-    }
-
-    @Override
-    public void setUpdatedAt(Date updatedAt) {
-        super.setUpdatedAt(updatedAt);
-    }
 }

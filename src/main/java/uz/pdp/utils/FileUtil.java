@@ -2,7 +2,6 @@ package uz.pdp.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class FileUtil {
-    private static final String PATH = "src/main/java/uz/pdp/database/";
+    private static final String PATH = "src/main/java/uz/pdp/recurse/";
 
     private static final ObjectMapper jsonMapper = new ObjectMapper();
     private static final XmlMapper xmlMapper = new XmlMapper();

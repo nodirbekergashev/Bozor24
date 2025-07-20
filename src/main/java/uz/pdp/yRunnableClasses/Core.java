@@ -6,6 +6,8 @@ import uz.pdp.model.Category;
 import uz.pdp.model.Product;
 import uz.pdp.model.User;
 import uz.pdp.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.InputMismatchException;
@@ -16,109 +18,110 @@ import static java.lang.System.exit;
 import static java.lang.Thread.sleep;
 
 public class Core {
+    private static final Logger log = LoggerFactory.getLogger(Core.class);
     static UserService userService = new UserService();
     static CartService cartService = new CartService();
     static ProductService productService = new ProductService();
-    static OrderService orderService = new OrderService();
     static CategoryService categoryService = new CategoryService();
+    static final String INVALID_INPUT_ERROR = "Invalid input, please enter a number.";
     static User currentUser;
 
     static Scanner scannerStr = new Scanner(System.in);
     static Scanner scannerInt = new Scanner(System.in);
 
     public static void main(String[] args) {
-        User admin = new User("Atabek M", "ata", "123", UserRole.ADMIN);
-        userService.add(admin);
-
         while (true) {
             int option = printWelcomeMenu();
             switch (option) {
                 case 1 -> register();
-
                 case 2 -> login();
-
                 case 0 -> exit(13);
-
             }
         }
     }
-///////////////////////// WELCOME MENU //////////////////////////////////
+
+    /// ////////////////////// WELCOME MENU //////////////////////////////////
 
     private static int printWelcomeMenu() {
         while (true) {
             System.out.println("""
                     
-                    Welcome to Bozor24!
                     1. Register
                     2. Login
                     0. Exit
                     """);
+            System.out.println(("Loading ...\n"));
             try {
-                sleep(1000);
+                sleep(3000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+               log.error("error",e);
             }
             System.out.print("Please select an option: ");
             try {
                 int option = scannerInt.nextInt();
                 if (option < 0 || option > 2) {
-                    System.out.println("Invalid option, please try again.");
+                    log.info("Invalid option, please try again.");
                     continue;
                 }
                 return option;
             } catch (Exception e) {
-                System.out.println("Invalid input, please enter a number.");
+                System.out.println((INVALID_INPUT_ERROR));
             }
         }
     }
 
-//////////////////////// REGISTER  /////////////////////////
+    /// ///////////////////// REGISTER  /////////////////////////
 
     private static void register() {
-        System.out.println("Enter your full name: ");
+        System.out.print("Enter your full name: ");
         String fullName = scannerStr.nextLine();
         String username;
         while (true) {
-            System.out.println("Enter username: ");
+            System.out.print("Enter username: ");
             username = scannerStr.nextLine();
             if (userService.isUsernameValid(username)) {
                 break;
             } else {
-                System.out.println("Invalid username. Try again!");
-                System.out.println("Username should be contains lowercase english letters and '_' ");
+                log.info("Invalid username. Try again!");
+                log.info("Username should be contains lowercase english letters and '_' ");
             }
         }
-        System.out.println("Enter password: ");
+        System.out.print("Enter password: ");
         String password = scannerStr.nextLine();
-        UserRole roleOption = UserRole.CUSTOMER;
+        UserRole roleOption;
         while (true) {
-            System.out.println("""
+            log.info("""
                     Select your role
                     1. Customer
                     2. Seller""");
             try {
                 int option = scannerInt.nextInt();
                 if (option > 2 || option < 0) {
-                    System.out.println("Enter 1 or 2");
+                    log.info("Enter 1 or 2");
                     continue;
                 }
                 switch (option) {
                     case 1 -> roleOption = UserRole.CUSTOMER;
                     case 2 -> roleOption = UserRole.SELLER;
+                    default -> {
+                        continue;
+                    }
                 }
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("Enter a valid number!");
+                log.info("Enter a valid number!");
             }
         }
-        userService.add(new User(fullName, username, password, roleOption));
+        userService.add(new User(fullName,"", username, password, roleOption));
         currentUser = userService.login(username, password);
+        log.info("Registration successful! Welcome, {} !\n", currentUser.getFullName());
         mainDashboard();
     }
-///////////////////////////// MAIN DASHBOARD ////////////////////////////
+
+    /// ////////////////////////// MAIN DASHBOARD ////////////////////////////
 
     private static void mainDashboard() {
-        System.out.println("Welcome to the main dashboard!");
+        log.info("Welcome to the main dashboard!");
         UserRole role = currentUser.getRole();
 
         if (role == UserRole.ADMIN) {
@@ -137,22 +140,22 @@ public class Core {
         }
     }
 
-    /////////////////////// LOGIN //////////////////////////
+    /// //////////////////// LOGIN //////////////////////////
 
     private static void login() {
-        System.out.println("Enter username: ");
+        log.info("Enter username: ");
         String username = scannerStr.nextLine();
-        System.out.println("Enter password: ");
+        System.out.print("Enter password: ");
         String password = scannerStr.nextLine();
         currentUser = userService.login(username, password);
         if (currentUser == null) {
-            System.out.println("Username or password is incorrect, please try again.");
+            log.info("Username or password is incorrect, please try again.");
             return;
         }
         mainDashboard();
     }
 
-    ///////////////////// ADMIN PAGE //////////////////////////////
+    /// ////////////////// ADMIN PAGE //////////////////////////////
 
     private static void adminPage() {
         while (true) {
@@ -162,28 +165,23 @@ public class Core {
                 option = scannerInt.nextInt();
                 scannerStr.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number. ");
+                log.info("Invalid input, please enter a number. ");
                 scannerStr.nextLine();
                 continue;
             }
-            System.out.println(""" 
-                    Choose option: 
-                    """);
-
             switch (option) {
                 case 1 -> manageUsers();
                 case 2 -> manageCategories();
                 case 3 -> manageProducts();
                 case 4 -> manageCarts();
                 case 5 -> searchGlobal();
-                case 6 -> changePassword(currentUser);
+                case 6 -> changePassword();
                 case 7 -> {
                     logout();
                     return;
                 }
                 case 0 -> exit(0);
-                default -> System.out.println("Invalid option. Try again.");
-
+                default -> log.info("Invalid option. Try again.");
             }
         }
 
@@ -231,20 +229,20 @@ public class Core {
 
     private static void logout() {
         currentUser = null;
-        System.out.println("Logged out successfully.");
+        log.info("Logged out successfully.");
     }
 
-    private static void changePassword(User user) {
-        System.out.println("Enter current password: ");
+    private static void changePassword() {
+        log.info("Enter current password: ");
         String oldPassword = scannerStr.nextLine();
-        if (!user.getPassword().equals(oldPassword)) {
-            System.out.println("Incorrect current password! ");
+        if (!currentUser.getPassword().equals(oldPassword)) {
+            log.info("Incorrect current password! ");
             return;
         }
-        System.out.println("Enter new password: ");
+        log.info("Enter new password: ");
         String newPassword = scannerStr.nextLine();
-        userService.changePassword(user,newPassword);
-        System.out.println("Password changed successfully! ");
+        userService.changePassword(currentUser, newPassword);
+        log.info("Password changed successfully! ");
     }
 
     private static void searchGlobal() {
@@ -252,20 +250,20 @@ public class Core {
 
     private static void manageCarts() {
         while (true) {
-            System.out.println("""
+            log.info("""
                     Manage Carts
                     1. View all carts
                     2. View user's cart
                     3. Clear user's cart
                     0. Back
                     """);
-            System.out.println("Choose option: ");
+            log.info("Choose option: ");
             int option;
             try {
                 option = scannerInt.nextInt();
                 scannerStr.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number.");
+                log.info(INVALID_INPUT_ERROR);
                 scannerStr.nextLine();
                 continue;
             }
@@ -277,37 +275,37 @@ public class Core {
                     }
                 }
                 case 2 -> {
-                    System.out.println("Enter username: ");
+                    log.info("Enter username: ");
                     String username = scannerStr.nextLine();
                     User user = userService.getUserByUsername(username);
                     Cart cart = cartService.getCartByUserId(user.getId());
                     if (cart == null) {
-                        System.out.println("Cart not found.");
+                        log.info("Cart not found.");
                     } else {
                         System.out.println(cart);
                     }
                 }
                 case 3 -> {
-                    System.out.println("Enter username: ");
+                    log.info("Enter username: ");
                     String username = scannerStr.nextLine();
                     User user = userService.getUserByUsername(username);
                     if (cartService.clearCart(user.getId())) {
-                        System.out.println("Cart cleared.");
+                        log.info("Cart cleared.");
                     } else {
-                        System.out.println("Cart not found.");
+                        log.info("Cart not found.");
                     }
                 }
                 case 0 -> {
                     return;
                 }
-                default -> System.out.println("Invalid option.Try again.");
+                default -> log.info("Invalid option.Try again.");
             }
         }
     }
 
     private static void manageProducts() {
         while (true) {
-            System.out.println("""
+            log.info("""
                     Manage Products
                     1. View all products
                     2. Search product
@@ -315,25 +313,25 @@ public class Core {
                     4. Delete product
                     0. Back
                     """);
-            System.out.println("Choose option: ");
+            log.info("Choose option: ");
             int option;
             try {
                 option = scannerInt.nextInt();
                 scannerStr.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number.");
+                System.out.print(INVALID_INPUT_ERROR);
                 scannerStr.nextLine();
                 continue;
             }
             switch (option) {
                 case 1 -> {
-                        List<Product> products = productService.getAll();
-                        for (Product product : products) {
-                            System.out.println(product);
-                        }
+                    List<Product> products = productService.getAll();
+                    for (Product product : products) {
+                        System.out.println(product);
+                    }
                 }
                 case 2 -> {
-                    System.out.println("Enter product name: ");
+                    log.info("Enter product name: ");
                     String productName = scannerStr.nextLine();
                     List<Product> products = productService.searchByProductName(productName);
                     for (Product product : products) {
@@ -341,7 +339,7 @@ public class Core {
                     }
                 }
                 case 3 -> {
-                    System.out.println("Enter category name: ");
+                    log.info("Enter category name: ");
                     String productCategory = scannerStr.nextLine();
                     List<Product> products = productService.getByCategory(productCategory);
                     for (Product product : products) {
@@ -349,39 +347,39 @@ public class Core {
                     }
                 }
                 case 4 -> {
-                    System.out.println("Enter product to delete: ");
+                    log.info("Enter product to delete: ");
                     String deleteProduct = scannerStr.nextLine();
-                    if (userService.delete(userService.getUserByUsername(deleteProduct).getId())){
-                        System.out.println("Product deleted.");
+                    if (userService.delete(userService.getUserByUsername(deleteProduct).getId())) {
+                        log.info("Product deleted.");
                     } else {
-                        System.out.println("Product not found");
+                        log.info("Product not found");
                     }
                 }
                 case 0 -> {
                     return;
                 }
-                default -> System.out.println("Invalid option. Try again.");
+                default -> log.info("Invalid option. Try again.");
             }
         }
     }
 
     private static void manageCategories() {
         while (true) {
-            System.out.println("""
-                    Manage Categories: 
+            log.info("""
+                    Manage Categories:
                     1. View category list
                     2. Browse category
                     3. Add category
                     4. Delete category
                     0. Back
                     """);
-            System.out.println("Choose option: ");
+            log.info("Choose option: ");
             int option;
             try {
                 option = scannerInt.nextInt();
                 scannerStr.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number.");
+                log.info("Invalid input, please enter a number.");
                 scannerStr.nextLine();
                 continue;
             }
@@ -389,108 +387,133 @@ public class Core {
                 case 1 -> {
                     List<Category> categories = categoryService.getAll();
                     for (Category c : categories) {
-                        System.out.println(c.getName());
+                        log.info(c.getName());
                     }
                 }
                 case 2 -> {
-                    /// / to do
+                    // todo something
                 }
                 case 3 -> {
-
+                    // todo something in here
                 }
+                case 4 -> {
+                    // todo
+                }
+                case 0 -> {
+                    return;
+                }
+                default -> log.info("Wrong option");
             }
         }
     }
 
     private static void manageUsers() {
         while (true) {
-            System.out.println("""
+            log.info("""
                     Manage Users
                     1. View all users by role
                     2. Delete user
                     3. Change user role
                     0. Back
-                      
-                     """);
+                    
+                    """);
             System.out.print("Choose option: ");
             int adminChoice;
             try {
                 adminChoice = scannerInt.nextInt();
                 scannerStr.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number.");
+                log.error("Invalid input, please enter a number.");
                 scannerStr.nextLine();
                 continue;
             }
             switch (adminChoice) {
-                case 1 -> {
-                    viewUsersByRole();
-                }
-                case 2 -> {
-                    System.out.println("Enter user to delete: ");
-                    String username = scannerStr.nextLine();
-                    if(userService.delete(userService.getUserByUsername(username).getId())){
-                       System.out.println("User deleted successfully.");
-                    } else {
-                       System.out.println("User not found.");
-                    }
-                }
-                case 3 -> {
-                    System.out.println("Enter user to change role: ");
-                    String username = scannerStr.nextLine();
-                    User user = userService.getUserByUsername(username);
-                    if (user != null) {
-                        System.out.println("""
-                                Select new role: 
-                                1. ADMIN
-                                2. SELLER
-                                3. COSTUMER """);
-                        int newRole;
-                        try {
-                            newRole = scannerInt.nextInt();
-                            scannerStr.nextLine();
-                        } catch (InputMismatchException e) {
-                            System.out.println("Invalid input, please enter a number.");
-                            scannerStr.nextLine();
-                            continue;
-                        }
-                        UserRole role = switch (newRole) {
-                            case 1 -> UserRole.ADMIN;
-                            case 2 -> UserRole.SELLER;
-                            case 3 -> UserRole.CUSTOMER;
-                            default -> null;
-                        };
-                        if (role != null) {
-                            userService.changeUserRole(user.getId(),role);
-                            System.out.println("Role updated successfully.");
-                        } else {
-                            System.out.println("Invalid, role selected.");
-                        }
-                    } else {
-                        System.out.println("User not found.");
-                    }
-                }
+                case 1 -> viewUsersByRole();
+
+                case 2 -> deleteUser();
+
+                case 3 -> changeUserRole();
+
                 case 0 -> {
                     return;
                 }
-                default -> System.out.println("Invalid option try again.");
+
+                default -> log.info("Invalid option try again.");
             }
         }
     }
 
+    private static void changeUserRole() {
+        while (true) {
+            log.info("Enter user to change role: ");
+            String username = scannerStr.nextLine();
+            User user = userService.getUserByUsername(username);
+            if (user != null) {
+                log.info("""
+                        Select new role:
+                        1. ADMIN
+                        2. SELLER
+                        3. COSTUMER""");
+                int newRole;
+                try {
+                    newRole = scannerInt.nextInt();
+                    scannerStr.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println(INVALID_INPUT_ERROR);
+                    scannerStr.nextLine();
+                    continue;
+                }
+                UserRole role = switch (newRole) {
+                    case 1 -> UserRole.ADMIN;
+                    case 2 -> UserRole.SELLER;
+                    case 3 -> UserRole.CUSTOMER;
+                    default -> null;
+                };
+                if (role != null) {
+                    userService.changeUserRole(user.getId(), role);
+                    log.info("Role updated successfully.");
+                    return;
+                } else {
+                    log.error("Invalid, role selected.");
+                }
+            } else {
+                log.info("User not found.");
+                return;
+            }
+        }
+    }
+
+    private static void deleteUser() {
+        while (true) {
+            log.info("Enter username to delete: ");
+            String username = scannerStr.nextLine();
+            if (username.equals("admin")) {
+                log.info("You cannot delete the admin user.");
+                continue;
+            }
+            if (userService.delete(userService.getUserByUsername(username).getId())) {
+                log.info("User deleted successfully.");
+                return;
+            } else {
+                log.error("User not found.");
+            }
+        }
+
+    }
+
     private static void viewUsersByRole() {
-        System.out.println("""
+        log.info("""
                 1. View Admins
                 2. View Sellers
                 3. View Costumers
-                0. Back """);
-        System.out.println("Choose option: ");
+                0. Back""");
+        log.info("Choose option: ");
         int choice;
         try {
             choice = scannerInt.nextInt();
             scannerStr.nextLine();
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please enter a number.");
+            System.out.println(INVALID_INPUT_ERROR);
             scannerStr.nextLine();
             return;
         }
@@ -500,25 +523,26 @@ public class Core {
             case 3 -> UserRole.CUSTOMER;
             default -> null;
         };
-        if ( role == null && choice != 0) {
-            System.out.println("Invalid option.");
+        if (role == null && choice != 0) {
+            log.info("Invalid option.");
             return;
         }
         if (choice == 0) return;
         List<User> users = userService.getByRole(role);
         if (users.isEmpty()) {
-            System.out.println("No users found for role: " + role);
+            log.info("No users found for role: {}", role);
         } else {
-            System.out.println("Users with role: " + role + ": ");
+            log.info("Users with role: {}:", role);
             for (User user : users) {
-                System.out.println("-" + user.getFullName() + " ( " + user.getUserName() + " )");
+                log.info("- name: {}, username: {}", user.getFullName(), user.getUserName());
             }
         }
     }
 
-    /////////////////////////// SELLER PAGE ////////////////////////
+    /// //////////////////////// SELLER PAGE ////////////////////////
 
     private static void sellerPage() {
+        printSellerMenu();
         //todo
         // printSellerMenu()
         // |-- 1 -> add product
@@ -534,9 +558,10 @@ public class Core {
         // |-- 0 -> logout() → back to printWelcomeMenu()
     }
 
-    //////////////////// CUSTOMER PAGE //////////////////
+    /// ///////////////// CUSTOMER PAGE //////////////////
 
     private static void customerPage() {
+        printCustomerMenu();
         //todo
         // printCustomerMenu()
         // |-- 1 -> browse categories
@@ -557,11 +582,10 @@ public class Core {
         // |-- 0 -> logout() → back to printWelcomeMenu()
     }
 
-    ///////////////////// PRINT MENUS ////////////////////////////
+    /// ////////////////// PRINT MENUS ////////////////////////////
 
     private static void printAdminMenu() {
-        System.out.println("""
-                Admin Menu:
+        log.info("""
                 1. Manage Users
                 2. Manage Categories
                 3. Manage Products
@@ -575,7 +599,7 @@ public class Core {
     }
 
     private static void printSellerMenu() {
-        System.out.println("""
+        log.info("""
                 Seller Menu:
                 1. Add Product
                 2. View My Products
@@ -588,7 +612,7 @@ public class Core {
     }
 
     private static void printCustomerMenu() {
-        System.out.println("""
+        log.info("""
                 Customer Menu:
                 1. Browse Categories
                 2. Search Products by Name

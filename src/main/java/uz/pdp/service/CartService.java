@@ -3,33 +3,29 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.itemClasses.CartItem;
 import uz.pdp.model.Cart;
-import uz.pdp.model.Order;
 
-import static uz.pdp.db.Lists.carts;
+
+import static uz.pdp.db.Lists.CARTS;
 
 import java.util.List;
 import java.util.UUID;
 
-import static uz.pdp.utils.FileUtil.readFromJson;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class CartService implements BaseService<Cart> {
     private static final String pathName = "carts.json";
 
-    public CartService() {
-        carts = readFromJson(pathName, Cart.class);
-    }
 
     @Override
     public boolean add(Cart cart) {
-        boolean exists = carts.stream()
+        boolean exists = CARTS.stream()
                 .anyMatch(c -> c.getUserId().equals(cart.getUserId()));
 
         if (exists) {
             System.out.println("Cart for this customer already exists.");
             return false;
         }
-        carts.add(cart);
+        CARTS.add(cart);
         saveToFile();
         return true;
     }
@@ -56,7 +52,7 @@ public class CartService implements BaseService<Cart> {
 
     @Override
     public Cart getById(UUID id) {
-        return carts.stream()
+        return CARTS.stream()
                 .filter(cart -> cart.getId().equals(id))
                 .findFirst()
                 .orElse(null);
@@ -64,13 +60,13 @@ public class CartService implements BaseService<Cart> {
 
     @Override
     public List<Cart> getAll() {
-        return carts;
+        return CARTS;
     }
 
     @Override
     public void saveToFile() {
         try {
-            writeToJson(pathName, carts);
+            writeToJson(pathName, CARTS);
         } catch (Exception e) {
             System.out.println("Error saving file" + e.getMessage());
         }
@@ -87,7 +83,7 @@ public class CartService implements BaseService<Cart> {
     }
 
     public Cart getCartByUserId(UUID userId) {
-        return carts.stream()
+        return CARTS.stream()
                 .filter(cart -> cart.getUserId().equals(userId) && cart.isActive())
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Cart not found for user. "));

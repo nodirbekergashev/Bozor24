@@ -1,6 +1,7 @@
 package uz.pdp.print;
 
 import uz.pdp.model.Category;
+import uz.pdp.model.Product;
 import uz.pdp.model.User;
 import uz.pdp.service.CategoryService;
 
@@ -46,4 +47,14 @@ public class Printable {
         return sb.toString();
     }
 
+    public static String printProducts(List<Product> products) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("%-36s %-20s %-20s %n", "Product Name", "Price", "Count"));
+        sb.append("=".repeat(40)).append(System.lineSeparator());
+        products.stream()
+                .filter(Product::isActive)
+                .forEach(product -> sb.append(String.format("%-36s %-20s %-20s %n",product.getName(),product.getPrice(),product.getQuantity())));
+        return sb.toString();
+    }
 }

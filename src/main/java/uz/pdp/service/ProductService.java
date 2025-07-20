@@ -3,26 +3,19 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static uz.pdp.utils.FileUtil.readFromJson;
-import static uz.pdp.db.Lists.products;
+import static uz.pdp.db.Lists.PRODUCTS;
 import static uz.pdp.utils.FileUtil.writeToJson;
 
 public class ProductService implements BaseService<Product> {
-    private static final String pathname = "orders.json";
-
-    public ProductService() {
-        readFromJson(pathname, Product.class);
-    }
+    private static final String PATHNAME = "products.json";
 
     @Override
     public boolean add(Product product) {
         if (!isDefined(product.getSellerId(), product.getName())) {
-            products.add(product);
+            PRODUCTS.add(product);
             saveToFile();
             return true;
         }
@@ -39,7 +32,7 @@ public class ProductService implements BaseService<Product> {
             old.setQuantity(product.getQuantity());
             old.setUpdatedAt(product.getUpdatedAt());
             old.setActive(product.isActive());
-            old.setCatId(product.getCatId());
+            old.setCategoryId(product.getCategoryId());
             old.setCreatedAt(product.getCreatedAt());
             saveToFile();
         }
@@ -57,7 +50,7 @@ public class ProductService implements BaseService<Product> {
 
     @Override
     public Product getById(UUID id) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(product -> product.getId().equals(id))
                 .findFirst()
                 .orElse(null);
@@ -65,12 +58,12 @@ public class ProductService implements BaseService<Product> {
 
     @Override
     public List<Product> getAll() {
-        return products;
+        return PRODUCTS;
     }
 
     @Override
     public void saveToFile() {
-        writeToJson(pathname, products);
+        writeToJson(PATHNAME, PRODUCTS);
     }
 
     @Override
@@ -84,32 +77,32 @@ public class ProductService implements BaseService<Product> {
     }
 
     public List<Product> getByCategory(String categoryName) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(product -> product.getName().equals(categoryName) && product.isActive())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public boolean isDefined(UUID sellerId, String productName) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .anyMatch(product -> product.getSellerId().equals(sellerId) &&
-                product.getName().equalsIgnoreCase(productName));
+                        product.getName().equalsIgnoreCase(productName));
     }
 
     public List<Product> getProductBySellerId(UUID sellerId) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(product -> product.getSellerId().equals(sellerId))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Product> searchByProductName(String keyword) {
         String search = keyword.trim().toLowerCase();
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(product -> product.isActive() && product.getName().toLowerCase().contains(search))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Product getByProductName(String productName) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(product -> product.isActive() && product.getName().equalsIgnoreCase(productName))
                 .findFirst()
                 .orElse(null);

@@ -3,40 +3,53 @@ package uz.pdp.service;
 import uz.pdp.baseAbs.BaseService;
 import uz.pdp.enums.UserRole;
 import uz.pdp.model.User;
-import uz.pdp.wrapperLists.CategoryListWrapper;
 import uz.pdp.wrapperLists.UserListWrapper;
 
 import java.util.List;
 import java.util.UUID;
-import static uz.pdp.db.Lists.users;
 
-import static uz.pdp.utils.FileUtil.readFromXml;
+import static uz.pdp.db.Lists.USERS;
+
 import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class UserService implements BaseService<User> {
     private static final String pathName = "users.xml";
 
-    public UserService() {
-        users = readFromXml(pathName,User.class);
+    static {
+        if (USERS.isEmpty()) {
+            USERS.add(new User("", "admin","0411", "1314", UserRole.ADMIN));
+        }
     }
 
     @Override
     public boolean add(User user) {
-        boolean existing = users.stream()
+        boolean existing = USERS.stream()
                 .anyMatch(u -> u.equals(user));
         if (existing) {
             System.out.println("This user already exists!");
             return false;
         }
-        users.add(user);
+        USERS.add(user);
         saveToFile();
         return true;
+    }
+
+    public User addBotUser(User user) {
+        boolean existing = USERS.stream()
+                .anyMatch(u -> u.equals(user));
+        if (existing) {
+            System.out.println("This user already exists!");
+            return null;
+        }
+        USERS.add(user);
+        saveToFile();
+        return user;
     }
 
     @Override
     public void update(UUID id, User user) {
         User u = getById(id);
-        if (u != null){
+        if (u != null) {
             u.setFullName(user.getFullName());
             u.setUserName(user.getUserName());
             u.setPassword(user.getPassword());
@@ -58,7 +71,7 @@ public class UserService implements BaseService<User> {
 
     @Override
     public User getById(UUID id) {
-        return users.stream()
+        return USERS.stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .orElse(null);
@@ -66,13 +79,13 @@ public class UserService implements BaseService<User> {
 
     @Override
     public List<User> getAll() {
-        return users;
+        return USERS;
     }
 
     @Override
     public void saveToFile() {
         try {
-            writeToXml(pathName, new UserListWrapper(users));
+            writeToXml(pathName, new UserListWrapper(USERS));
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
@@ -89,14 +102,15 @@ public class UserService implements BaseService<User> {
     }
 
     public User login(String username, String password) {
-        return users.stream()
+        return USERS.stream()
+                .filter(User::isActive)
                 .filter(user -> user.getUserName().equals(username) && user.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
     }
 
     public User getUserByUsername(String username) {
-        return users.stream()
+        return USERS.stream()
                 .filter(user -> user.getUserName().equals(username))
                 .findFirst()
                 .orElse(null);
@@ -107,12 +121,13 @@ public class UserService implements BaseService<User> {
     }
 
     public boolean changeUserRole(UUID id, UserRole newRole) {
-        boolean result =  users.stream()
+        boolean result = USERS.stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .map(user -> {
                     user.setRole(newRole);
-                            return true;})
+                    return true;
+                })
                 .orElse(false);
 
         if (result) {
@@ -122,7 +137,7 @@ public class UserService implements BaseService<User> {
     }
 
     public List<User> getByRole(UserRole role) {
-        return users.stream()
+        return USERS.stream()
                 .filter(user -> user.getRole().equals(role))
                 .toList();
     }

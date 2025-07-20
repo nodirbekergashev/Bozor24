@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import uz.pdp.baseAbs.BaseModel;
+import uz.pdp.enums.OrderStatus;
 import uz.pdp.itemClasses.OrderItem;
 
 import java.util.List;
@@ -16,5 +17,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Order extends BaseModel {
     private UUID userId;
+    private String orderNumber;
     private List<OrderItem> ordersByUser;
+    private double totalPrice;
+    private OrderStatus status;
 }

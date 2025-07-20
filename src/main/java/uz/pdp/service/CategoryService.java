@@ -7,23 +7,17 @@ import uz.pdp.wrapperLists.CategoryListWrapper;
 import java.util.List;
 import java.util.UUID;
 
-import static uz.pdp.db.Lists.categories;
-import static uz.pdp.utils.FileUtil.readFromXml;
+import static uz.pdp.db.Lists.CATEGORIES;
 import static uz.pdp.utils.FileUtil.writeToXml;
 
 public class CategoryService implements BaseService<Category> {
     private static final String pathName = "categories.xml";
-
-    public CategoryService() {
-        categories = readFromXml(pathName, Category.class);
-    }
-
-    @Override
+        @Override
     public boolean add(Category category) {
         if (category == null || isDefined(category.getName())) {
             return false;
         }
-        categories.add(category);
+        CATEGORIES.add(category);
         saveToFile();
         return true;
     }
@@ -47,7 +41,7 @@ public class CategoryService implements BaseService<Category> {
 
     @Override
     public Category getById(UUID id) {
-        return categories.stream()
+        return CATEGORIES.stream()
                 .filter(category -> category.getId().equals(id))
                 .findFirst()
                 .orElse(null);
@@ -55,13 +49,13 @@ public class CategoryService implements BaseService<Category> {
 
     @Override
     public List<Category> getAll() {
-        return categories;
+        return CATEGORIES;
     }
 
     @Override
     public void saveToFile() {
         try {
-            writeToXml(pathName, new CategoryListWrapper(categories));
+            writeToXml(pathName, new CategoryListWrapper(CATEGORIES));
         } catch (Exception e) {
             System.out.println("Error saving file " + e.getMessage());
         }
@@ -69,25 +63,25 @@ public class CategoryService implements BaseService<Category> {
     }
 
     public Category getCategoryByName(String name) {
-        return categories.stream()
+        return CATEGORIES.stream()
                 .filter(category -> category.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
 
     public boolean isDefined(String name) {
-        return categories.stream()
+        return CATEGORIES.stream()
                 .anyMatch(category -> category.getName().equalsIgnoreCase(name));
     }
 
     public List<Category> getSubCategories(UUID parentId) {
-        return categories.stream()
+        return CATEGORIES.stream()
                 .filter(category -> category.getParentId().equals(parentId))
                 .toList();
     }
 
     public Category getParentCategory(UUID childId) {
-        return categories.stream()
+        return CATEGORIES.stream()
                 .filter(category -> category.getId().equals(childId))
                 .findFirst()
                 .orElse(null);

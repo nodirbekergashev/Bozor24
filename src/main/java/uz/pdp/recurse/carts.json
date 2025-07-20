@@ -1,0 +1,15 @@
+[ {
+  "id" : "68dfbd57-c716-4512-9f6d-6881aaad0923",
+  "createdAt" : 1752298823148,
+  "updatedAt" : 1752298823148,
+  "userId" : "0b58aad4-94cd-403b-bfba-395ed50a8df5",
+  "products" : [ ],
+  "active" : true
+}, {
+  "id" : "31cd4d99-001f-4ccc-8229-a8964b3a3d36",
+  "createdAt" : 1752249717479,
+  "updatedAt" : 1752249717479,
+  "userId" : "25378db7-13c9-4c93-b365-837576463e20",
+  "products" : [ ],
+  "active" : true
+} ]
